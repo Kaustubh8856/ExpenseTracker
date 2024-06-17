@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 30px 0 10px;
+  width: 360px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 `;
