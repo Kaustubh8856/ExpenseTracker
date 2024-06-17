@@ -1,27 +1,24 @@
+import React from "react";
 import styled from "styled-components";
-import HomeComponent from "./modules/home";
+import OverviewComponent from "./OverviewComponent";
+import TransactionComponent from "./TransactionComponent";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 30px 0 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  margin: 30px 0 10px;
-`;
-const Header = styled.div`
-  color: black;
-  font-size: 25px;
-  font-weight: bold;
 `;
 
-function App() {
+const HomeComponent = () => {
   return (
     <Container>
-      <Header>Expense Tracker</Header>
-      <HomeComponent />
+      <OverviewComponent />
+      <TransactionComponent />
     </Container>
   );
-}
+};
 
-export default App;
+export default HomeComponent;
