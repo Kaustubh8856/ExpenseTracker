@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import OverviewComponent from "./OverviewComponent";
 import TransactionComponent from "./TransactionComponent";
@@ -13,11 +13,17 @@ const Container = styled.div`
     "Lucida Sans", Arial, sans-serif;
 `;
 
-const HomeComponent = () => {
+const HomeComponent = (props) => {
+  const [transactions, updateTransactions] = useState([]);
+  const addTransaction = (paylode) => {
+    const transactionArray = [...transactions];
+    transactionArray.push(paylode);
+    updateTransactions(transactionArray);
+  };
   return (
     <Container>
-      <OverviewComponent />
-      <TransactionComponent />
+      <OverviewComponent addTransaction={addTransaction} />
+      <TransactionComponent transactions={transactions} />
     </Container>
   );
 };

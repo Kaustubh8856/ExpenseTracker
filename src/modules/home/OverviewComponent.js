@@ -57,8 +57,13 @@ const AddTransactionView = (props) => {
   const [desc, setDesc] = useState();
   const [type, setType] = useState("EXPENSE");
   const addTransaction = () => {
-    console.log({ amount, desc, type });
-    props.setIsAdd()
+    props.addTransaction({
+      amount: Number(amount),
+      desc,
+      type,
+      id: Date.now(),
+    });
+    props.setIsAdd();
   };
 
   return (
@@ -101,7 +106,7 @@ const AddTransactionView = (props) => {
   );
 };
 
-const OverviewComponent = () => {
+const OverviewComponent = (props) => {
   const [isAdd, setIsAdd] = useState(false);
   return (
     <Container>
@@ -111,7 +116,13 @@ const OverviewComponent = () => {
           {isAdd ? "Cancel" : "Add"}
         </AddTransaction>
       </BalanceBox>
-      {isAdd && <AddTransactionView setIsAdd={setIsAdd} />}
+      {isAdd && (
+        <AddTransactionView
+          setIsAdd={setIsAdd}
+          addTransaction={props.addTransaction}
+        />
+        
+      )}
     </Container>
   );
 };
