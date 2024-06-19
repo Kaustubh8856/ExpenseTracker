@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -44,12 +44,35 @@ const TransactionCell = (props) => {
 };
 
 const TransactionComponent = (props) => {
+  const [searchText, updateSearchText] = useState("");
+  const [filteredTransaction, updateTxn] = useState(props.transactions);
+  const filterData = (searchText) => {
+    if (!searchText || !searchText.trim().length) {
+      updateTxn(props.transactions);
+      return;
+    }
+    let txn = [...props.transactions];
+    txn = txn.filter((payload) => {
+      payload.desc.toLowerCase().includes(searchText.toLowerCase().trim());
+    });
+    updateTxn(txn);
+  };
+
+  useEffect(() => filterData(searchText), [props.transactions]);
   return (
     <Container>
-      TransactionComponent
-      <input type="text" placeholder="Search" />
-      {props.transactions.length
-        ? props.transactions.map((payload) => (
+      Transactions
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchText}
+        onChange={(e) => {
+          updateSearchText(e.target.value);
+          filterData(e.target.value);
+        }}
+      />
+      {filteredTransaction.length
+        ? filteredTransaction.map((payload) => (
             <TransactionCell payload={payload} />
           ))
         : ""}
