@@ -73,7 +73,7 @@ const ExpenseBox = styled.div`
 `;
 
 const AddTransactionView = (props) => {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(null);
   const [desc, setDesc] = useState();
   const [type, setType] = useState("EXPENSE");
   const addTransaction = () => {
@@ -131,7 +131,7 @@ const OverviewComponent = (props) => {
   return (
     <Container>
       <BalanceBox>
-        Balance: ₹10,000
+        Balance: ₹{props.income - props.expense}
         <AddTransaction onClick={() => setIsAdd(!isAdd)}>
           {isAdd ? "Cancel" : "Add"}
         </AddTransaction>
@@ -145,10 +145,10 @@ const OverviewComponent = (props) => {
 
       <ExpenseContainer>
         <ExpenseBox isIncome={false}>
-          Expense <span>₹1000</span>
+          Expense <span>₹{props.expense}</span>
         </ExpenseBox>
         <ExpenseBox isIncome={true}>
-          Income <span>₹1000</span>
+          Income <span>₹{props.income}</span>
         </ExpenseBox>
       </ExpenseContainer>
     </Container>
